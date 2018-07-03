@@ -5,19 +5,26 @@ IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/tgsocksproxy"
 gitlink="https://github.com/alexbers/tgsocksproxy.git"
 
-preinstall() {
-#downloading
-sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install htop git
-
-echo > check_file.cfg
-install
+mtproxy_install() {
+read -p "Желаете установить MTProxy? (y/n)" check
+if [[check != "y"]]; then
+exit 0
+else
+./install.sh
+fi
 }
 
-if [ -e $DIRECTORY/check_file.cfg ]; then 
-install; else
-preinstall
+finish() {
+cd $DIRECTORY
+echo "SOCKS5 " > check_file.cfg
+echo "Установка SOCKS5 успешно завершена! Ваша ссылка для подключения: https://t.me/socks?server=${IP}&port=1080&user=${LOGIN}&pass=${PASSWORD}"
+echo "IP: ${IP}, port: 1080, login: ${LOGIN}, password: ${PASSWORD}"
+if grep "MTProxy" check_file.cfg; then
+exit 0
+else
+mtproxy_install
 fi
+}
 
 install() {
 if grep "SOCKS" check_file.cfg; then
@@ -61,23 +68,16 @@ sudo systemctl daemon-reload && sudo systemctl restart SOCKS5.service && sudo sy
 finish
 }
 
-mtproxy_install() {
-read -p "Желаете установить MTProxy? (y/n)" check
-if [[check != "y"]]; then
-exit 0
-else
-./install.sh
-fi
+preinstall() {
+#downloading
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install htop git
+
+echo > check_file.cfg
+install
 }
 
-finish() {
-cd $DIRECTORY
-echo "SOCKS5 " > check_file.cfg
-echo "Установка SOCKS5 успешно завершена! Ваша ссылка для подключения: https://t.me/socks?server=${IP}&port=1080&user=${LOGIN}&pass=${PASSWORD}"
-echo "IP: ${IP}, port: 1080, login: ${LOGIN}, password: ${PASSWORD}"
-if grep "MTProxy" check_file.cfg; then
-exit 0
-else
-mtproxy_install
+if [ -e $DIRECTORY/check_file.cfg ]; then 
+install; else
+preinstall
 fi
-}

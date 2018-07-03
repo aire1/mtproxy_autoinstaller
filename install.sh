@@ -5,24 +5,26 @@ IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
 
-preinstall() {
-#downloading
-sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install htop git
-
-#ports
-sudo iptables -t nat -A PREROUTING -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 1443
-sudo apt-get install iptables-persistent
-sudo service netfilter-persistent save
-
-echo > check_file.cfg
-install
+socks_install() {
+read -p "Желаете установить SOCKS5? (y/n)" check
+if [[check != "y"]]; then
+exit 0
+else
+./socks_install.sh
+fi
 }
 
-if [ -e $DIRECTORY/check_file.cfg ]; then 
-install; else
-preinstall
+finish() {
+cd $DIRECTORY
+echo "MTProxy " > check_file.cfg
+echo "Установка MTProxy успешно завершена! Ваша ссылка для подключения: https://t.me/proxy?server=${IP}&port=443&secret=${SECRET}"
+echo "IP: ${IP}, port: 443 или 1443, secret: ${SECRET}"
+if grep "SOCKS5" check_file.cfg; then
+exit 0
+else
+socks_install
 fi
+}
 
 install() {
 if grep "MTProxy" check_file.cfg; then
@@ -67,23 +69,21 @@ sudo systemctl daemon-reload && sudo systemctl restart MTProxy.service && sudo s
 finish
 }
 
-socks_install() {
-read -p "Желаете установить SOCKS5? (y/n)" check
-if [[check != "y"]]; then
-exit 0
-else
-./socks_install.sh
-fi
+preinstall() {
+#downloading
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install htop git
+
+#ports
+sudo iptables -t nat -A PREROUTING -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 1443
+sudo apt-get install iptables-persistent
+sudo service netfilter-persistent save
+
+echo > check_file.cfg
+install
 }
 
-finish() {
-cd $DIRECTORY
-echo "MTProxy " > check_file.cfg
-echo "Установка MTProxy успешно завершена! Ваша ссылка для подключения: https://t.me/proxy?server=${IP}&port=443&secret=${SECRET}"
-echo "IP: ${IP}, port: 443 или 1443, secret: ${SECRET}"
-if grep "SOCKS5" check_file.cfg; then
-exit 0
-else
-socks_install
+if [ -e $DIRECTORY/check_file.cfg ]; then 
+install; else
+preinstall
 fi
-}
