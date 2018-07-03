@@ -4,6 +4,23 @@ DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
 IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/tgsocksproxy"
 gitlink="https://github.com/alexbers/tgsocksproxy.git"
+LOGIN=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 5 | xargs`
+PASSWORD=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 7 | xargs`
+generate() {
+while getopts "l:p:" arg; do
+	case $arg in
+		l)
+		LOGIN=$OPTARG
+        ;;
+		p)
+		PASSWORD=$OPTARG
+		;;
+		*)
+		usage
+		exit 1
+	esac
+done
+}
 
 finish() {
 cd $DIRECTORY
@@ -20,22 +37,8 @@ fi
 usage() {
     echo "Использование: ./installsocks.sh -l <login> -p <password>"
 }
-LOGIN=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 5 | xargs`
-PASSWORD=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 7 | xargs`
 
-while getopts "l:p:" arg; do
-	case $arg in
-		l)
-		LOGIN=$OPTARG
-        ;;
-		p)
-		PASSWORD=$OPTARG
-		;;
-		*)
-		usage
-		exit 1
-	esac
-done
+generate
 
 CONFIG="PORT = 1080\nUSERS = {\"${LOGIN}\": \"${PASSWORD}\"}"
 
