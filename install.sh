@@ -4,7 +4,6 @@ DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
 IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
-SECRET=`head -c 16 /dev/urandom | xxd -ps`
 
 finish() {
 cd $DIRECTORY
@@ -25,11 +24,13 @@ if getopts "s:" arg; then
             usage
             exit 1
     esac
+else
+SECRET=`head -c 16 /dev/urandom | xxd -ps`
+fi	
 
 if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
     echo "Secret должен быть 32-значным ключом, содержащим только HEX-символы"
     exit 1
-fi
 fi
 } 
 
