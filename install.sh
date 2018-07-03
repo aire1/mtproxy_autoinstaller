@@ -5,10 +5,19 @@ IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
 SECRET=$1
+
+checkinstallation() {
+if grep -q "MTProxy" check_file.cfg; then
+echo "MTProxy уже установлен на вашем сервере! Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
+exit 1
+fi
+}
+
 finish() {
 cd $DIRECTORY
 echo "MTProxy " > check_file.cfg
 echo "Установка MTProxy успешно завершена! Ваша ссылка для подключения: https://t.me/proxy?server=${IP}&port=443&secret=${SECRET}"
+exit 0
 }
 
 generate() {
@@ -30,10 +39,6 @@ fi
 } 
 
 install() {
-#if grep -q "MTProxy" check_file.cfg; then
-#echo "MTProxy уже установлен на вашем сервере! Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
-#exit 1
-#fi
 
 generate
 
@@ -61,16 +66,23 @@ preinstall() {
 sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install htop git
 
-#ports
-sudo iptables -t nat -A PREROUTING -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 1443
-sudo apt-get install iptables-persistent
-sudo service netfilter-persistent save
-
 echo > check_file.cfg
 install
 }
 
+preinstallports() {
+#ports
+sudo iptables -t nat -A PREROUTING -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 1443
+sudo apt-get install iptables-persistent
+sudo service netfilter-persistent save
+install
+}
+
+checkinstallation
+
 if [ -e $DIRECTORY/check_file.cfg ]; then 
-install; else
+if grep -q "SOCKS"; then
+preinstallports; else
 preinstall
+fi
 fi
