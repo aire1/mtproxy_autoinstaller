@@ -30,6 +30,7 @@ if [[check != "y"]]; then
 exit 0
 else
 ./socks_install.sh
+fi
 }
 
 install() {

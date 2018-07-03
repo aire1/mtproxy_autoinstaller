@@ -67,6 +67,7 @@ if [[check != "y"]]; then
 exit 0
 else
 ./install.sh
+fi
 }
 
 finish() {
