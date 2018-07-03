@@ -5,15 +5,7 @@ IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
 
-function socks_install() {
-read -p "Желаете установить SOCKS5? (y/n)" check
-if [[check != "y"]]; then
-exit 0
-else
-./socks_install.sh
-}
-
-function preinstall() {
+preinstall() {
 #downloading
 sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install htop git
@@ -32,13 +24,21 @@ install; else
 preinstall
 fi
 
-function install() {
+socks_install() {
+read -p "Желаете установить SOCKS5? (y/n)" check
+if [[check != "y"]]; then
+exit 0
+else
+./socks_install.sh
+}
+
+install() {
 if grep "MTProxy" check_file.cfg; then
 echo "MTProxy уже установлен на вашем сервере! Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
 exit 1
 fi
 
-function usage() {
+usage() {
     echo "Использование: ./install.sh -s <secret>"
 }
 SECRET=`head -c 16 /dev/urandom | xxd -ps`
@@ -75,7 +75,7 @@ sudo systemctl daemon-reload && sudo systemctl restart MTProxy.service && sudo s
 finish
 }
 
-function finish() {
+finish() {
 cd $DIRECTORY
 echo "MTProxy " > check_file.cfg
 echo "Установка MTProxy успешно завершена! Ваша ссылка для подключения: https://t.me/proxy?server=${IP}&port=443&secret=${SECRET}"
