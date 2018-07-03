@@ -4,6 +4,7 @@ DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
 IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
+
 finish() {
 cd $DIRECTORY
 echo "MTProxy " > check_file.cfg
@@ -12,17 +13,16 @@ echo "Установка MTProxy успешно завершена! Ваша с�
 
 generate() {
 usage() {
-    echo "Использование: ./install.sh <secret>"
+    echo "Использование: ./install.sh -s <secret>"
 }
-if [[ -z $var ]]; then
-SECRET=$1
-
-if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
-    echo "Secret должен быть 32-значным ключом, содержащим только HEX-символы."
-	exit 1
-fi
-else
+if [[-z $1]]; then
 SECRET=`head -c 16 /dev/urandom | xxd -ps`
+else
+SECRET=$1
+if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
+    echo "Secret должен быть 32-значным ключом, содержащим только HEX-символы"
+    exit 1
+fi
 fi
 } 
 
