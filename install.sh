@@ -8,7 +8,7 @@ SECRET=$1
 
 checkinstallation() {
 if grep -q "MTProxy" check_file.cfg; then
-echo "MTProxy уже установлен на вашем сервере! Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
+echo "MTProxy уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
 exit 1
 fi
 }
