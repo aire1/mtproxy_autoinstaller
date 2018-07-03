@@ -15,24 +15,16 @@ generate() {
 usage() {
     echo "Использование: ./install.sh -s <secret>"
 }
+if [ -n "$1" ]
+then
+SECRET=$1
+else
 SECRET=`head -c 16 /dev/urandom | xxd -ps`
-echo $SECRET
-while getopts "s:" arg; do
-    case $arg in
-        s)
-            SECRET=$OPTARG
-			echo $SECRET
-            ;;
-        *)
-            usage
-            exit 1
-    esac
-done
+fi
 
 if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
     echo "Secret должен быть 32-значным ключом, содержащим только HEX-символы"
     exit 1
-fi
 fi
 } 
 
