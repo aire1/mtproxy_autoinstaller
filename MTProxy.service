@@ -1,0 +1,10 @@
+[Unit] 
+Description=MTProxy 
+After=network.target 
+[Service] 
+Type=simple 
+WorkingDirectory=/opt/mtprotoproxy 
+ExecStart=/opt/mtprotoproxy/mtprotoproxy.py 
+Restart=on-failure 
+[Install] 
+WantedBy=multi-user.target

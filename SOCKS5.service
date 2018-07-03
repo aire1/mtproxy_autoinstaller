@@ -1,0 +1,12 @@
+[Unit]
+Description=SOCKS5
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/tgsocksproxy
+ExecStart=/opt/tgsocksproxy/tgsocksproxy.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
