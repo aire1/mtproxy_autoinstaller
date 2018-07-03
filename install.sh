@@ -24,15 +24,6 @@ install; else
 preinstall
 fi
 
-socks_install() {
-read -p "Желаете установить SOCKS5? (y/n)" check
-if [[check != "y"]]; then
-exit 0
-else
-./socks_install.sh
-fi
-}
-
 install() {
 if grep "MTProxy" check_file.cfg; then
 echo "MTProxy уже установлен на вашем сервере! Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
@@ -74,6 +65,15 @@ echo | sed  "i$CONFIG" > config.py
 sudo cp $DIRECTORY/MTProxy.service /etc/systemd/system/
 sudo systemctl daemon-reload && sudo systemctl restart MTProxy.service && sudo systemctl enable MTProxy.service
 finish
+}
+
+socks_install() {
+read -p "Желаете установить SOCKS5? (y/n)" check
+if [[check != "y"]]; then
+exit 0
+else
+./socks_install.sh
+fi
 }
 
 finish() {
