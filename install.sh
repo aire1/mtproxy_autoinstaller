@@ -53,17 +53,20 @@ if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
     exit 1
 fi
 
-CONFIG="PORT = 1443
-USERS = {\"tg\":  \"${SECRET}\"}"
+CONFIG="PORT = 1443\nUSERS = {\"tg\":  \"${SECRET}\"}"
+
+writing(){
+cd $INSTALL_ROOT
+rm config.py
+echo | sed  "i$CONFIG" > config.py
+}
 
 #MTProxy setup
 cd /opt
 sudo mkdir $INSTALL_ROOT
 sudo chown $USER $INSTALL_ROOT
 git clone -b master $gitlink
-cd $INSTALL_ROOT
-rm config.py
-echo | sed  "i$CONFIG" > config.py
+writing
 sudo cp $DIRECTORY/MTProxy.service /etc/systemd/system/
 sudo systemctl daemon-reload && sudo systemctl restart MTProxy.service && sudo systemctl enable MTProxy.service
 finish

@@ -52,17 +52,20 @@ while getopts "l:p:" arg; do
 	esac
 done
 
-CONFIG="PORT = 1080
-USERS = {\"${LOGIN}\": \"${PASSWORD}\"}"
+CONFIG="PORT = 1080\nUSERS = {\"${LOGIN}\": \"${PASSWORD}\"}"
+
+writing(){
+cd $INSTALL_ROOT
+rm config.py
+echo | sed  "i$CONFIG" > config.py
+}
 
 #SOCKS5 setup
 cd /opt
 sudo mkdir $INSTALL_ROOT
 sudo chown $USER $INSTALL_ROOT
 git clone $gitlink
-cd $INSTALL_ROOT
-rm config.py
-echo | sed  "i$CONFIG" > config.py
+writing
 sudo cp $DIRECTORY/SOCKS5.service /etc/systemd/system/
 sudo systemctl daemon-reload && sudo systemctl restart SOCKS5.service && sudo systemctl enable SOCKS5.service
 finish
