@@ -8,9 +8,9 @@ gitlink="https://github.com/alexbers/tgsocksproxy.git"
 mtproxy_install() {
 read -p "Желаете установить MTProxy? (y/n)" check
 if [[check != "y"]]; then
-exit 0
-else
 ./install.sh
+else
+exit 0
 fi
 }
 

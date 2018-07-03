@@ -7,10 +7,10 @@ gitlink="https://github.com/alexbers/mtprotoproxy.git"
 
 socks_install() {
 read -p "Желаете установить SOCKS5? (y/n)" check
-if [[check != "y"]]; then
-exit 0
-else
+if [[check == "y"]]; then
 ./socks_install.sh
+else
+exit 0
 fi
 }
 
