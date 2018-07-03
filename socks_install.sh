@@ -5,29 +5,14 @@ IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/tgsocksproxy"
 gitlink="https://github.com/alexbers/tgsocksproxy.git"
 
-mtproxy_install() {
-read -p "Желаете установить MTProxy? (y/n)" check
-if [[check != "y"]]; then
-./install.sh
-else
-exit 0
-fi
-}
-
 finish() {
 cd $DIRECTORY
-echo "SOCKS5 " > check_file.cfg
+echo | sed  "SOCKS5\n" > check_file.cfg
 echo "Установка SOCKS5 успешно завершена! Ваша ссылка для подключения: https://t.me/socks?server=${IP}&port=1080&user=${LOGIN}&pass=${PASSWORD}"
-echo "IP: ${IP}, port: 1080, login: ${LOGIN}, password: ${PASSWORD}"
-if grep "MTProxy" check_file.cfg; then
-exit 0
-else
-mtproxy_install
-fi
 }
 
 install() {
-if grep "SOCKS" check_file.cfg; then
+if grep -q "SOCKS" check_file.cfg; then
 echo "SOCKS5 уже установлен на вашем сервере! Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
 exit 1
 fi

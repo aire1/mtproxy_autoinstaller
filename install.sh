@@ -4,39 +4,14 @@ DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
 IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
-
-socks_install() {
-read -p "Желаете установить SOCKS5? (y/n)" check
-if [[check == "y"]]; then
-./socks_install.sh
-else
-exit 0
-fi
-}
-
+SECRET=`head -c 16 /dev/urandom | xxd -ps`
 finish() {
 cd $DIRECTORY
-echo "MTProxy " > check_file.cfg
+echo | sed  "MTProxy\n" > check_file.cfg
 echo "Установка MTProxy успешно завершена! Ваша ссылка для подключения: https://t.me/proxy?server=${IP}&port=443&secret=${SECRET}"
-echo "IP: ${IP}, port: 443 или 1443, secret: ${SECRET}"
-if grep "SOCKS5" check_file.cfg; then
-exit 0
-else
-socks_install
-fi
 }
 
-install() {
-if grep "MTProxy" check_file.cfg; then
-echo "MTProxy уже установлен на вашем сервере! Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
-exit 1
-fi
-
-usage() {
-    echo "Использование: ./install.sh -s <secret>"
-}
-SECRET=`head -c 16 /dev/urandom | xxd -ps`
-
+generate() {
 while getopts "s:" arg; do
     case $arg in
         s)
@@ -52,6 +27,19 @@ if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
     echo "Secret должен быть 32-значным ключом, содержащим только HEX-символы"
     exit 1
 fi
+} 
+
+install() {
+if grep -q "MTProxy" check_file.cfg; then
+echo "MTProxy уже установлен на вашем сервере! Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
+exit 1
+fi
+
+usage() {
+    echo "Использование: ./install.sh -s <secret>"
+}
+
+generate
 
 CONFIG="PORT = 1443\nUSERS = {\"tg\":  \"${SECRET}\"}"
 
