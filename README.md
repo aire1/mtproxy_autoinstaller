@@ -1,4 +1,4 @@
-# MTProtoproxy auto-installer #
+# MTProxy and SOCKS5 auto-installer #
 
 Simple and very fast installer for mtprotoproxy.
 
