@@ -9,7 +9,7 @@ PASSWORD=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 7 | xargs`
 
 finish() {
 cd $DIRECTORY
-echo "SOCKS5" > check_file.cfg
+echo "SOCKS " > check_file.cfg
 echo "Установка SOCKS5 успешно завершена! Ваша ссылка для подключения: https://t.me/socks?server=${IP}&port=1080&user=${LOGIN}&pass=${PASSWORD}"
 }
 

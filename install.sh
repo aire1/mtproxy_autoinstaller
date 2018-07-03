@@ -8,7 +8,7 @@ SECRET=`head -c 16 /dev/urandom | xxd -ps`
 
 finish() {
 cd $DIRECTORY
-echo "MTProxy" > check_file.cfg
+echo "MTProxy " > check_file.cfg
 echo "Установка MTProxy успешно завершена! Ваша ссылка для подключения: https://t.me/proxy?server=${IP}&port=443&secret=${SECRET}"
 }
 
