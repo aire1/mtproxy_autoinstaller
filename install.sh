@@ -81,7 +81,7 @@ install
 checkinstallation
 
 if [ -e $DIRECTORY/check_file.cfg ]; then 
-if grep -q "SOCKS"; then
+if grep -q "SOCKS" check_file.cfg; then
 preinstallports; else
 preinstall
 fi
