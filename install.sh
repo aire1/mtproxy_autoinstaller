@@ -14,15 +14,15 @@ generate() {
 usage() {
     echo "Использование: ./install.sh <secret>"
 }
-if [[-z "$var"]]; then
-SECRET=`head -c 16 /dev/urandom | xxd -ps`
-else
+if [[ -z $var ]]; then
 SECRET=$1
 
 if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
     echo "Secret должен быть 32-значным ключом, содержащим только HEX-символы."
 	exit 1
 fi
+else
+SECRET=`head -c 16 /dev/urandom | xxd -ps`
 fi
 } 
 
