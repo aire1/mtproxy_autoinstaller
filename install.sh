@@ -13,7 +13,7 @@ echo "Установка MTProxy успешно завершена! Ваша с�
 
 generate() {
 usage() {
-    echo "Использование: ./install.sh -s <secret>"
+    echo "Использование: ./install.sh <secret>"
 }
 if [ -n "$SECRET" ]
 then
