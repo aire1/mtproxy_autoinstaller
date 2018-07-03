@@ -4,8 +4,9 @@ DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
 IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/tgsocksproxy"
 gitlink="https://github.com/alexbers/tgsocksproxy.git"
-LOGIN=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 5 | xargs`
-PASSWORD=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 7 | xargs`
+LOGIN=$1
+PASSWORD=$2
+
 finish() {
 cd $DIRECTORY
 echo "SOCKS " > check_file.cfg
@@ -13,22 +14,19 @@ echo "Установка SOCKS5 успешно завершена! Ваша сс
 }
 
 generate() {
-usage() {
-    echo "Использование: ./installsocks.sh -l <login> -p <password>"
-}
-while getopts "l:p:" arg; do
-	case $arg in
-		l)
-		LOGIN=$OPTARG
-        ;;
-		p)
-		PASSWORD=$OPTARG
-		;;
-		*)
-		usage
-		exit 1
-	esac
-done
+if [ -n "$LOGIN" ]
+then
+LOGIN=$LOGIN
+else
+LOGIN=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 5 | xargs`
+fi
+
+if [ -n "$PASSWORD" ]
+then
+PASSWORD=$PASSWORD
+else
+PASSWORD=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 7 | xargs`
+fi
 }
 
 install() {
