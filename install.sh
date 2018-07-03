@@ -13,7 +13,10 @@ echo "Установка MTProxy успешно завершена! Ваша с�
 }
 
 generate() {
-while getopts "s:" arg; do
+usage() {
+    echo "Использование: ./install.sh -s <secret>"
+}
+if getopts "s:" arg; then
     case $arg in
         s)
             SECRET=$OPTARG
@@ -22,11 +25,11 @@ while getopts "s:" arg; do
             usage
             exit 1
     esac
-done
 
 if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
     echo "Secret должен быть 32-значным ключом, содержащим только HEX-символы"
     exit 1
+fi
 fi
 } 
 
@@ -35,10 +38,6 @@ if grep -q "MTProxy" check_file.cfg; then
 echo "MTProxy уже установлен на вашем сервере! Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
 exit 1
 fi
-
-usage() {
-    echo "Использование: ./install.sh -s <secret>"
-}
 
 generate
 
