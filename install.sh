@@ -17,9 +17,9 @@ usage() {
 }
 if [ -n "$SECRET" ]
 then
-$SECRET=$SECRET
+SECRET=$SECRET
 else
-$SECRET=`head -c 16 /dev/urandom | xxd -ps`
+SECRET=`head -c 16 /dev/urandom | xxd -ps`
 fi
 
 if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
