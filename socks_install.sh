@@ -6,6 +6,14 @@ INSTALL_ROOT="/opt/tgsocksproxy"
 gitlink="https://github.com/alexbers/tgsocksproxy.git"
 LOGIN=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 5 | xargs`
 PASSWORD=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 7 | xargs`
+socks5="SOCKS5\n"
+
+finish() {
+cd $DIRECTORY
+echo | sed $socks5 > check_file.cfg
+echo "Установка SOCKS5 успешно завершена! Ваша ссылка для подключения: https://t.me/socks?server=${IP}&port=1080&user=${LOGIN}&pass=${PASSWORD}"
+}
+
 generate() {
 while getopts "l:p:" arg; do
 	case $arg in
@@ -20,12 +28,6 @@ while getopts "l:p:" arg; do
 		exit 1
 	esac
 done
-}
-
-finish() {
-cd $DIRECTORY
-echo | sed  "SOCKS5\n" > check_file.cfg
-echo "Установка SOCKS5 успешно завершена! Ваша ссылка для подключения: https://t.me/socks?server=${IP}&port=1080&user=${LOGIN}&pass=${PASSWORD}"
 }
 
 install() {
