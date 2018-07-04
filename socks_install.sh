@@ -7,22 +7,9 @@ gitlink="https://github.com/alexbers/tgsocksproxy.git"
 LOGIN=$1
 PASSWORD=$2
 
-checkinstallation() {
-
-if grep -q "SOCKS" check_file.cfg; then
-
-echo "SOCKS5 уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
-
-exit 1
-
-fi
-}
-
 finish() {
 
 cd $DIRECTORY
-
-echo "SOCKS " > check_file.cfg
 
 echo "Установка SOCKS5 успешно завершена! Ваша ссылка для подключения: https://t.me/socks?server=${IP}&port=1080&user=${LOGIN}&pass=${PASSWORD}"
 
@@ -99,13 +86,3 @@ echo > check_file.cfg
 
 install
 }
-
-checkinstallation
-
-if [ -e $DIRECTORY/check_file.cfg ]; then 
-
-install; else
-
-preinstall
-
-fi

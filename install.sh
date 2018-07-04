@@ -6,22 +6,10 @@ INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
 SECRET=$1
 
-checkinstallation() {
-if grep -q "MTProxy" check_file.cfg; then
-
-echo "MTProxy уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
-
-exit 1
-fi
-}
-
 finish() {
 cd $DIRECTORY
 
-echo "MTProxy " > check_file.cfg
-
 echo "Установка MTProxy успешно завершена! Ваша ссылка для подключения: https://t.me/proxy?server=${IP}&port=443&secret=${SECRET}"
-echo "Или: tg://proxy?server=${IP}&port=443&secret=${SECRET}"
 
 exit 0
 }
@@ -98,15 +86,3 @@ sudo service netfilter-persistent save
 
 install
 }
-
-checkinstallation
-
-if [ -e $DIRECTORY/check_file.cfg ]; then 
-
-if grep -q "SOCKS" check_file.cfg; then
-
-preinstallports; else
-
-preinstall
-fi
-fi
