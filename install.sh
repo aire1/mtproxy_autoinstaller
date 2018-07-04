@@ -27,18 +27,10 @@ exit 0
 }
 
 generate() {
-<<<<<<< HEAD
-
 if [ -n "$SECRET" ]; then
 
 SECRET=$SECRET; else
 
-=======
-if [ -n "$SECRET" ]
-then
-SECRET=$SECRET
-else
->>>>>>> a6cd4fbb16811a22a1a1aff0368e279ec2985860
 SECRET=`head -c 16 /dev/urandom | xxd -ps`
 
 fi
