@@ -5,7 +5,7 @@ IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
 SECRET=$1
-
+echo > check_file.cfg
 checkinstallation() {
 if grep -q "MTProxy" check_file.cfg; then
 
