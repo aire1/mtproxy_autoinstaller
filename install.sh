@@ -96,7 +96,7 @@ sudo apt-get install iptables-persistent
 
 sudo service netfilter-persistent save
 
-install
+preinstall
 }
 
 checkinstallation
