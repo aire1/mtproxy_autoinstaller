@@ -44,7 +44,7 @@ cd $INSTALL_ROOT
 
 rm config.py
 
-echo -e "$CONFIG" > config.py
+echo | sed  "i$CONFIG" > config.py
 }
 
 #MTProxy setup
@@ -70,8 +70,6 @@ preinstall() {
 sudo apt-get update && sudo apt-get upgrade
 
 sudo apt-get install htop git
-
-echo > check_file.cfg
 
 install
 }
