@@ -56,7 +56,7 @@ cd $INSTALL_ROOT
 
 rm config.py
 
-echo | sed  "i$CONFIG" > config.py
+echo -e "$CONFIG" > config.py
 }
 
 #MTProxy setup
