@@ -17,4 +17,4 @@ You must have open 443 and 1080 ports.
 - You can set your own secret for MTProxy (it should be 32-chars HEX 0-9 a-f), just write it after `./install.sh`
 (`./install.sh <secret>`)
 - You can set your own login and password for socks5 proxy, just just write it after `./socks_install.sh`          
-(`./install.sh <login <password>`)
+(`./install.sh <login> <password>`)
