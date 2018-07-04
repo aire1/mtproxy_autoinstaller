@@ -6,8 +6,19 @@ INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
 SECRET=$1
 
+checkinstallation() {
+if grep -q "MTProxy" check_file.cfg; then
+
+echo "MTProxy уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
+
+exit 1
+fi
+}
+
 finish() {
 cd $DIRECTORY
+
+echo "MTProxy " > check_file.cfg
 
 echo "Установка MTProxy успешно завершена! Ваша ссылка для подключения: https://t.me/proxy?server=${IP}&port=443&secret=${SECRET}"
 
@@ -15,6 +26,7 @@ exit 0
 }
 
 generate() {
+
 if [ -n "$SECRET" ]; then
 
 SECRET=$SECRET; else
@@ -36,7 +48,7 @@ install() {
 
 generate
 
-CONFIG="PORT = 1443\nUSERS = {\"tg\":  \"${SECRET}\"}""
+CONFIG="PORT = 1443\nUSERS = {\"tg\":  \"${SECRET}\"}"
 
 writing(){
 
@@ -44,7 +56,7 @@ cd $INSTALL_ROOT
 
 rm config.py
 
-echo -e "$CONFIG" > config.py
+echo | sed  "i$CONFIG" > config.py
 }
 
 #MTProxy setup
@@ -85,9 +97,6 @@ sudo apt-get install iptables-persistent
 sudo service netfilter-persistent save
 
 install
-<<<<<<< HEAD
-}
-=======
 }
 
 checkinstallation
@@ -101,4 +110,3 @@ preinstallports; else
 preinstall
 fi
 fi
->>>>>>> a1af7bf7bdb846e0a8eed8dc3f66d91b6e09b876
