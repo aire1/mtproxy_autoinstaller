@@ -21,9 +21,6 @@ exit 0
 }
 
 generate() {
-usage() {
-    echo "Использование: ./install.sh <secret>"
-}
 if [ -n "$SECRET" ]
 then
 SECRET=$SECRET
