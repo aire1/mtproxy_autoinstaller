@@ -85,4 +85,20 @@ sudo apt-get install iptables-persistent
 sudo service netfilter-persistent save
 
 install
+<<<<<<< HEAD
 }
+=======
+}
+
+checkinstallation
+
+if [ -e $DIRECTORY/check_file.cfg ]; then 
+
+if grep -q "SOCKS" check_file.cfg; then
+
+preinstallports; else
+
+preinstall
+fi
+fi
+>>>>>>> a1af7bf7bdb846e0a8eed8dc3f66d91b6e09b876
