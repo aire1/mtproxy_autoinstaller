@@ -65,7 +65,7 @@ install() {
 
 generate
 
-CONFIG="PORT = 1443\nUSERS = {\"tg\":  \"${SECRET}\"}"
+CONFIG="PORT = 1443\nUSERS = {\"tg\":  \"${SECRET}\"}\nAD_TAG = \"${AD_TAG}\""
 
 writing(){
 
