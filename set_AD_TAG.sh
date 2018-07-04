@@ -26,4 +26,5 @@ if [ -z `echo $AD_TAG | grep -x '[[:xdigit:]]\{32\}'` ]; then
 else
 
 echo -e "$TRUE_CONFIG" > config.py
+sudo systemctl restart MTProxy.service
 fi
