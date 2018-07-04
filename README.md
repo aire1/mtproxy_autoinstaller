@@ -6,7 +6,7 @@ Simple and very fast installer for mtprotoproxy.
 
 ### Requirements
 
-You must have open 443 and 1080 ports.
+If you want to install MTProxy, open 443 port, if you want to install SOCKS5, open 1080 port.
 
 ### How to install?
 
