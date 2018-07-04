@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ABSOLUTE_FILENAME=`readlink -e "$0"`
 DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
 IP=`wget -qO- eth0.me`
@@ -63,8 +63,8 @@ finish
 
 preinstall() {
 #downloading
-sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install htop git
+sudo apt-get update -y && sudo apt-get upgrade -y
+sudo apt-get -y install htop git
 
 echo > check_file.cfg
 install
