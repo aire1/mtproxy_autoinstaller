@@ -27,6 +27,3 @@ else
 
 echo -e "$TRUE_CONFIG" > config.py
 fi
-else
-echo | sed  "i$TRUE_CONFIG" > config.py
-fi
