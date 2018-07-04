@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ABSOLUTE_FILENAME=`readlink -e "$0"`
 DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
 IP=`wget -qO- eth0.me`
@@ -79,9 +79,9 @@ finish
 
 preinstall() {
 #downloading
-sudo apt-get update && sudo apt-get upgrade
+sudo apt-get update -y && sudo apt-get upgrade -y
 
-sudo apt-get install htop git
+sudo apt-get -y install htop git
 
 echo > check_file.cfg
 
@@ -92,7 +92,7 @@ preinstallports() {
 #ports
 sudo iptables -t nat -A PREROUTING -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 1443
 
-sudo apt-get install iptables-persistent
+sudo apt-get -y install iptables-persistent
 
 sudo service netfilter-persistent save
 
