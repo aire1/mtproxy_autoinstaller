@@ -15,7 +15,7 @@ If you want to install MTProxy, open 443 port, if you want to install SOCKS5, op
 3. `./install.sh` (or `./socks_install.sh` if you want to install socks5 proxy)
 4. Just copy link and use your proxy!
 
-### Advanced usage
+### Advanced install
 - You can set your own secret for MTProxy (it should be 32-chars HEX 0-9 a-f), just write it after `./install.sh`
 (`./install.sh <secret>`)
 - You can set your own login and password for socks5 proxy, just just write it after `./socks_install.sh`          
