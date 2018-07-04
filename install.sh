@@ -85,7 +85,7 @@ sudo apt-get install htop git
 
 echo > check_file.cfg
 
-install
+preinstallports
 }
 
 preinstallports() {
@@ -96,7 +96,7 @@ sudo apt-get install iptables-persistent
 
 sudo service netfilter-persistent save
 
-preinstall
+install
 }
 
 checkinstallation
