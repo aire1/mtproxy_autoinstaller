@@ -5,7 +5,6 @@ IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
 SECRET=$1
-AD_TAG=$2
 
 checkinstallation() {
 if grep -q "MTProxy" check_file.cfg; then
@@ -35,14 +34,6 @@ SECRET=`head -c 16 /dev/urandom | xxd -ps`
 
 fi
 
-if [ -n "$AD_TAG" ]; then
-
-AD_TAG=$AD_TAG; else
-
-AD_TAG=`head -c 16 /dev/urandom | xxd -ps`
-
-fi
-
 if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
 
     echo "Secret должен быть 32-значным ключом, содержащим только HEX-символы"
@@ -50,22 +41,13 @@ if [ -z `echo $SECRET | grep -x '[[:xdigit:]]\{32\}'` ]; then
 exit 1
 
 fi
-
-if [ -z `echo $AD_TAG | grep -x '[[:xdigit:]]\{32\}'` ]; then
-
-    echo "AD_TAG должен быть 32-значным ключом, содержащим только HEX-символы"
-
-exit 1
-
-fi
-
 } 
 
 install() {
 
 generate
 
-CONFIG="PORT = 1443\nUSERS = {\"tg\":  \"${SECRET}\"}\nAD_TAG = \"${AD_TAG}\""
+CONFIG="PORT = 1443\nUSERS = {\"tg\":  \"${SECRET}\"}""
 
 writing(){
 
