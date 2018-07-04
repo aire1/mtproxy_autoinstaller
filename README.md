@@ -12,7 +12,7 @@ You must have open 443 and 1080 ports.
 
 1. `git clone https://github.com/aire1/mtproxy_autoinstaller.git; cd mtproxy_autoinstaller`
 2. `sudo chmod ugo+x install.sh && sudo chmod ugo+x socks_install.sh`
-3. `./install.sh` (or `./socks_install.ah` if you want to install socks5 proxy)
+3. `./install.sh` (or `./socks_install.sh` if you want to install socks5 proxy)
 4. Just copy link and use your proxy!
 
 ### Advanced usage
