@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 AD_TAG=$1
 
