@@ -9,7 +9,7 @@ PASSWORD=$2
 
 preinstall() {
 #downloading
-sudo apt-get update -y && sudo apt-get upgrade -y
+sudo apt-get update -y
 sudo apt-get -y install htop git
 
 echo > check_file.cfg
