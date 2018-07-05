@@ -12,6 +12,7 @@ if grep -q "SOCKS" check_file.cfg; then
 echo "SOCKS5 уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
 exit 1
 fi
+fi
 }
 
 finish() {
