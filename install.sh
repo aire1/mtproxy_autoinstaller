@@ -8,7 +8,7 @@ SECRET=$1
 
 preinstall() {
 #downloading
-sudo apt-get update -y && sudo apt-get upgrade -y
+sudo apt-get update -y
 
 sudo apt-get -y install htop git
 
