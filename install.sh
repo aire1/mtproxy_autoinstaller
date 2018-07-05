@@ -5,13 +5,14 @@ IP=`wget -qO- eth0.me`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
 SECRET=$1
-echo > check_file.cfg
 checkinstallation() {
+if [ -e $DIRECTORY/check_file.cfg ]; then
 if grep -q "MTProxy" check_file.cfg; then
 
 echo "MTProxy уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
 
 exit 1
+fi
 fi
 }
 
