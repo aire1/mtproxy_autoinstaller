@@ -6,8 +6,8 @@ INSTALL_ROOT="/opt/tgsocksproxy"
 gitlink="https://github.com/alexbers/tgsocksproxy.git"
 LOGIN=$1
 PASSWORD=$2
-echo > check_file.cfg
 checkinstallation() {
+if [ -e $DIRECTORY/check_file.cfg ]; then
 if grep -q "SOCKS" check_file.cfg; then
 echo "SOCKS5 уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
 exit 1
