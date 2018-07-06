@@ -7,26 +7,6 @@ gitlink="https://github.com/alexbers/tgsocksproxy.git"
 LOGIN=$1
 PASSWORD=$2
 
-preinstall() {
-#downloading
-sudo apt-get update -y
-sudo apt-get -y install htop git
-
-echo > check_file.cfg
-install
-}
-
-checkinstallation() {
-if [ -e $DIRECTORY/check_file.cfg ]; then
-if grep -q "SOCKS" check_file.cfg; then
-echo "SOCKS5 уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
-exit 1
-fi
-else
-preinstall
-fi
-}
-
 finish() {
 cd $DIRECTORY
 echo "SOCKS " > check_file.cfg
@@ -72,6 +52,26 @@ writing
 sudo cp $DIRECTORY/SOCKS5.service /etc/systemd/system/
 sudo systemctl daemon-reload && sudo systemctl restart SOCKS5.service && sudo systemctl enable SOCKS5.service
 finish
+}
+
+preinstall() {
+#downloading
+sudo apt-get update -y
+sudo apt-get -y install htop git
+
+echo > check_file.cfg
+install
+}
+
+checkinstallation() {
+if [ -e $DIRECTORY/check_file.cfg ]; then
+if grep -q "SOCKS" check_file.cfg; then
+echo "SOCKS5 уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
+exit 1
+fi
+else
+preinstall
+fi
 }
 
 checkinstallation
