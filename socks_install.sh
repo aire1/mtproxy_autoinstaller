@@ -16,16 +16,16 @@ echo > check_file.cfg
 install
 }
 
-#checkinstallation() {
-#if [ -e $DIRECTORY/check_file.cfg ]; then
-#if grep -q "SOCKS" check_file.cfg; then
-#echo "SOCKS5 уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
-#exit 1
-#fi
-#else
-#preinstall
-#fi
-#}
+checkinstallation() {
+if [ -e $DIRECTORY/check_file.cfg ]; then
+if grep -q "SOCKS" check_file.cfg; then
+echo "SOCKS5 уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
+exit 1
+fi
+else
+preinstall
+fi
+}
 
 finish() {
 cd $DIRECTORY
@@ -74,4 +74,4 @@ sudo systemctl daemon-reload && sudo systemctl restart SOCKS5.service && sudo sy
 finish
 }
 
-preinstall
+checkinstallation
