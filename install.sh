@@ -109,4 +109,4 @@ sudo systemctl daemon-reload && sudo systemctl restart MTProxy.service && sudo s
 finish
 }
 
-checkinstallation
+preinstall
