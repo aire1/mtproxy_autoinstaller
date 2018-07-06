@@ -74,4 +74,4 @@ sudo systemctl daemon-reload && sudo systemctl restart SOCKS5.service && sudo sy
 finish
 }
 
-checkinstallation
+preinstall
