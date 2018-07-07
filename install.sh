@@ -76,8 +76,6 @@ sudo apt-get update -y
 
 sudo apt-get -y install htop git
 
-echo > check_file.cfg
-
 sudo iptables -t nat -A PREROUTING -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 1443
 
 sudo apt-get -y install iptables-persistent
@@ -92,7 +90,6 @@ sudo apt-get update -y
 
 sudo apt-get -y install htop git
 
-echo > check_file.cfg
 install
 }
 
