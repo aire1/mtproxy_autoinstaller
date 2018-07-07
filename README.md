@@ -8,10 +8,11 @@ Simple and very fast installer for mtprotoproxy.
 
 If you want to install MTProxy, open 443 port, if you want to install SOCKS5, open 1080 port.
 
-### How to install?
+### How to install MTProxy (user friendly)?
 
 1. `curl -s https://raw.githubusercontent.com/aire1/mtproxy_autoinstaller/stable/autoinstall.sh | sh` and get your personal MTProxy.       
-## OR
+
+## How to install (manual)?
 1. `git clone -b stable https://github.com/aire1/mtproxy_autoinstaller.git; cd mtproxy_autoinstaller`
 2. `sudo chmod ugo+x install.sh && sudo chmod ugo+x socks_install.sh && sudo chmod ugo+x set_AD_TAG.sh`
 3. `./install.sh` (or `./socks_install.sh` if you want to install socks5 proxy)
