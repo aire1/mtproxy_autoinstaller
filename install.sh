@@ -1,4 +1,7 @@
 #!/bin/sh
+
+sudo apt update && sudo apt install tmux -y
+
 ABSOLUTE_FILENAME=`readlink -e "$0"`
 DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
 IP=`wget -qO- eth0.me`
@@ -80,7 +83,8 @@ sudo apt-get -y install htop git
 
 sudo iptables -t nat -A PREROUTING -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 1443
 
-sudo apt-get -y install iptables-persistent
+sudo tmux -L dialog-session new-session -d iptables-persistent
+sudo tmux -L dialog-session send-keys Enter
 
 sudo service netfilter-persistent save
 
