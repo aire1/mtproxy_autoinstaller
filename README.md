@@ -8,7 +8,7 @@ Simple and very fast installer for mtprotoproxy.
 
 If you want to install MTProxy, open 443 port, if you want to install SOCKS5, open 1080 port.
 
-### How to install MTProxy (user friendly)?
+## How to install MTProxy (user friendly)?
 
 1. `curl -s https://raw.githubusercontent.com/aire1/mtproxy_autoinstaller/stable/autoinstall.sh | sh` and get your personal MTProxy.       
 
