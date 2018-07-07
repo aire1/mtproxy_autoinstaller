@@ -102,6 +102,8 @@ exit 1
 else
 if grep -q "SOCKS" check_file.cfg; then
 preinstall2
+else
+preinstall
 fi
 fi
 else
