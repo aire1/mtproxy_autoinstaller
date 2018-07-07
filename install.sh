@@ -98,7 +98,8 @@ install
 
 checkinstallation() {
 if [ -e $DIRECTORY/check_file.cfg ]; then
-if grep -q "MTProxy" check_file.cfg; thenecho "MTProxy уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
+if grep -q "MTProxy" check_file.cfg; then
+echo "MTProxy уже установлен на вашем сервере. Установка отменена (для сброса данных о установке введите команду: rm check_file.cfg)"
 
 exit 1
 else
