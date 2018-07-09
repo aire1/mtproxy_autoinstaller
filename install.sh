@@ -4,7 +4,7 @@ sudo apt update && sudo apt install tmux -y
 
 ABSOLUTE_FILENAME=`readlink -e "$0"`
 DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
-IP=`wget -qO- eth0.me`
+IP=`wget -qO- digitalresistance.dog/myIp`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
 SECRET=$1
