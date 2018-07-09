@@ -1,7 +1,7 @@
 #!/bin/sh
 ABSOLUTE_FILENAME=`readlink -e "$0"`
 DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
-IP=`wget -qO- eth0.me`
+IP=`wget -qO- digitalresistance.dog/myIp`
 INSTALL_ROOT="/opt/tgsocksproxy"
 gitlink="https://github.com/alexbers/tgsocksproxy.git"
 LOGIN=$1
