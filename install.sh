@@ -15,6 +15,7 @@ cd $DIRECTORY
 echo "MTProxy " > check_file.cfg
 
 echo "\nУстановка MTProxy успешно завершена! Ваша ссылка для подключения: https://t.me/proxy?server=${IP}&port=1443&secret=${SECRET}\n"
+echo "или: https://t.me/proxy?server=${IP}&port=443&secret=dd${SECRET}\n"
 
 exit 0
 }
