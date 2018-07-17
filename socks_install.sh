@@ -40,7 +40,7 @@ CONFIG="PORT = 1080\nUSERS = {\"${LOGIN}\": \"${PASSWORD}\"}"
 writing(){
 cd $INSTALL_ROOT
 rm config.py
-echo | sed  "i$CONFIG" > config.py
+echo "$CONFIG" > config.py
 }
 
 #SOCKS5 setup
