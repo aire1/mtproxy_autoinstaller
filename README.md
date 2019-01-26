@@ -21,7 +21,7 @@ If you want to install MTProxy, open 1443 port, if you want to install SOCKS5, o
 ### Advanced install
 - You can set your own secret for MTProxy (it should be 32-chars HEX 0-9 a-f), just write it after `./install.sh`
 (`./install.sh <secret>`)
-- You can set your own login and password for socks5 proxy, just just write it after `./socks_install.sh`          
+- You can set your own login and password for socks5 proxy, just write it after `./socks_install.sh`          
 (`./socks_install.sh <login> <password>`)
 - Of course you can set your own AD_TAG, just write if after `./set_AD_TAG.sh`                 
 (`./set_AD_TAG.sh <AD_TAG>`)
