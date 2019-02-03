@@ -10,7 +10,7 @@ PASSWORD=$2
 finish() {
 cd $DIRECTORY
 echo "SOCKS " > check_file.cfg
-echo "Установка SOCKS5 успешно завершена! Ваша ссылка для подключения: https://t.me/socks?server=${IP}&port=1080&user=${LOGIN}&pass=${PASSWORD}"
+echo "Установка SOCKS5 успешно завершена! Ваша ссылка для подключения:\nhttps://t.me/socks?server=${IP}&port=1080&user=${LOGIN}&pass=${PASSWORD}"
 }
 
 generate() {
