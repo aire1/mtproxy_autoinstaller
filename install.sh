@@ -4,7 +4,7 @@ sudo apt update
 
 ABSOLUTE_FILENAME=`readlink -e "$0"`
 DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
-IP=`wget -qO- digitalresistance.dog/myIp`
+IP=`wget -qO- ipv4.icanhazip.com`
 INSTALL_ROOT="/opt/mtprotoproxy"
 gitlink="https://github.com/alexbers/mtprotoproxy.git"
 SECRET=$1
